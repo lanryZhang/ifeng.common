@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:cf="java:com.ifeng.common.conf" targetNamespace="java:com.ifeng.common.conf">
+  <!-- 顶层元素 -->
+  <element name="config" type="cf:ConfigItem"/>
+  
+  <simpleType name="extBoolean">
+    <restriction base="string">
+      <enumeration value="true"/>
+      <enumeration value="false"/>
+      <enumeration value="1"/>
+      <enumeration value="0"/>
+      <enumeration value="yes"/>
+      <enumeration value="no"/>
+    </restriction>
+  </simpleType>
+  
+  <simpleType name="extInteger">
+    <restriction base="string">
+      <pattern value="-?0[xX][0-9A-Fa-f]+"/>
+      <pattern value="-?#[0-9A-Fa-f]+"/>
+      <pattern value="-?[1-9][0-9]*"/>
+      <pattern value="-?0[0-7]*"/>
+    </restriction>
+  </simpleType>
+    
+  <simpleType name="extNonNegativeInteger">
+    <restriction base="string">
+      <pattern value="0[xX][0-9A-Fa-f]+"/>
+      <pattern value="#[0-9A-Fa-f]+"/>
+      <pattern value="[1-9][0-9]*"/>
+      <pattern value="0[0-7]*"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="extPositiveInteger">
+    <restriction base="string">
+      <pattern value="0[xX][0-9A-Fa-f]+"/>
+      <pattern value="#[0-9A-Fa-f]+"/>
+      <pattern value="[1-9][0-9]*"/>
+      <pattern value="0[1-7][0-7]*"/>
+    </restriction>
+  </simpleType>
+
+  <group name="invokeArgsGroup">
+    <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="arg" type="cf:ConfigItem">
+        <annotation>
+          <documentation>
+            指定调用参数。
+        </documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </group>
+  
+  <complexType name="_genericInvoke">
+    <annotation>
+      <documentation>
+       调用一个方法，得到其返回值的通用定义。
+    </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="cf:_configurableItemRestricted">
+        <sequence>
+          <group ref="cf:invokeArgsGroup"/>
+        </sequence>
+        <attribute name="method" type="string" use="required">
+          <annotation>
+            <documentation>
+              指定调用的方法名。如果同名方法有多个，会根据arg的类型自动找到匹配的方法。
+          </documentation>
+          </annotation>
+        </attribute>
+      </extension>
+    </complexContent>
+  </complexType>
+  
+  <group name="propertyGroup">
+    <sequence>
+      <choice maxOccurs="unbounded" minOccurs="0">
+        <element name="set-property" type="cf:ConfigItem">
+          <annotation>
+            <documentation>
+             对象配置完之后，设置其property，每个set-property设置一个property。
+             必须指定name属性。
+          </documentation>
+          </annotation>
+        </element>
+        <element name="set-properties">
+          <annotation>
+            <documentation>
+             对象配置完之后，设置其property，每个set-properties可以设置多个property。
+             使用attribute名字和值来设置相应名字的property
+          </documentation>
+          </annotation>
+          <complexType>
+            <anyAttribute processContents="skip"/>
+          </complexType>
+        </element>
+        <element name="invoke" type="cf:_genericInvoke">
+          <annotation>
+            <documentation>
+             对象配置完之后，调用其方法。
+          </documentation>
+          </annotation>
+        </element>
+      </choice>
+    </sequence>
+  </group>
+
+  <group name="constructorGroup">
+    <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="constructor-arg" type="cf:ConfigItem">
+        <annotation>
+          <documentation>
+           给出创建对象所需的的constructor参数。如果有多个constructor，根据给定的
+            constructor-arg的类型自动匹配选择。<br/>
+           如果没有指定任何constructor-arg，则使用value创建，或者使用无参数的constructor。
+           不要同时指定value属性和constructor-arg子元素，否则只有constructor-arg起作用。
+        </documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </group>
+  
+  <complexType mixed="true" name="ConfigItem">
+    <annotation>
+      <documentation>
+       配置项。分为两种：<br/>
+      1) 简单配置项：配置一个primitive或bean(非Configurable)，使用type属性<br/>
+      2) Configurable配置项，使用xsi:type属性<br/>
+    </documentation>
+    </annotation>
+    <sequence>
+      <group ref="cf:constructorGroup"/>
+      <group ref="cf:propertyGroup"/>
+    </sequence>
+    
+    <attribute name="name" type="string">
+      <annotation>
+        <documentation>
+         配置项的名称。只是为了简化xsd才定义到这里。并不是所有的配置项都需要。
+      </documentation>
+      </annotation>
+    </attribute>
+    <attribute default="java.lang.String" name="type" type="string">
+      <annotation>
+        <documentation>
+        1. 对于简单类型(primitive或bean(或简单类型的数组)，非Configurable)，用type指定类型。
+          可以用Java primitive类型，如int、boolean、double等。也可以用Java类名。<br/>
+          对于可以直接解析字符串值的类，可以直接定义数组，如int[]。<br/>
+          否则需要用xsi:type="ArrayConfig"。<br/>
+        2. 如果是Configurable类型，需要用xsi:type指定类型。
+        (但在某些情况下需要用value子元素，如set-property元素。参见具体提示。)
+      </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="value" type="string">
+      <annotation>
+        <documentation>
+         简单类型对象的字符串值。对于不同的类型，有不同的解析方式。
+         例如，boolean类型可以用true/false/1/0/yes/no。int类型可以用0x等前缀。
+         对于数组类型，可以用多个用逗号隔开的值。
+         具体参见ConfigRoot.decodeString方法。
+         不要同时指定value属性和constructor-arg子元素，否则只有constructor-arg起作用。
+      </documentation>
+      </annotation>
+    </attribute>
+  </complexType>
+
+  <complexType abstract="true" name="_configurableItem">
+    <annotation>
+      <documentation>
+      Configurable配置项，禁止type和value属性
+    </documentation>
+    </annotation>
+    <complexContent>
+      <restriction base="cf:ConfigItem">
+        <sequence>
+          <group ref="cf:constructorGroup"/>
+          <group ref="cf:propertyGroup"/>
+        </sequence>
+        <attribute name="type" use="prohibited"/>
+        <attribute name="value" use="prohibited"/>
+      </restriction>
+    </complexContent>
+  </complexType>
+  
+  <complexType abstract="true" name="_configurableItemWithoutCtor">
+    <annotation>
+      <documentation>
+       禁止constructor-arg的configurable配置项。
+    </documentation>
+    </annotation>
+    <complexContent>
+      <restriction base="cf:_configurableItem">
+      	<!-- sequence>
+          <group ref="cf:propertyGroup"/>
+        </sequence -->
+      </restriction>
+    </complexContent>
+  </complexType>
+  
+  <complexType abstract="true" name="_configurableItemRestricted">
+    <annotation>
+      <documentation>
+       禁止constructor-arg、set-property、set-properties的configurable配置项。
+    </documentation>
+    </annotation>
+    <complexContent>
+      <restriction base="cf:_configurableItem">
+      </restriction>
+    </complexContent>
+  </complexType>
+  
+  <complexType name="IncludeConfig">
+    <annotation>
+      <documentation>
+       包含另一个配置文件。
+    </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="cf:_configurableItemRestricted">
+        <attribute name="file" type="string" use="required">
+          <annotation>
+            <documentation>
+              被包含的文件名。如果是相对路径，则相对于当前ConfigRoot的根路径。
+          </documentation>
+          </annotation>
+        </attribute>
+        <attribute default="false" name="direct" type="cf:extBoolean">
+          <annotation>
+            <documentation>
+              是否用被包含文件内容直接替换当前元素，还是在当前元素下生成额外一级层次。
+          </documentation>
+          </annotation>
+        </attribute>
+      </extension>
+    </complexContent>
+  </complexType>
+  
+  <complexType name="InvokeConfig">
+    <annotation>
+      <documentation>
+       调用一个对象的方法，得到其返回值。
+    </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="cf:_configurableItemRestricted">
+        <sequence>
+          <group ref="cf:invokeArgsGroup"/>
+        </sequence>
+        <attribute name="method" type="string" use="required">
+          <annotation>
+            <documentation>
+              指定调用的方法名。如果同名方法有多个，会根据arg的类型自动找到匹配的方法。
+          </documentation>
+          </annotation>
+        </attribute>
+      </extension>
+    </complexContent>
+  </complexType>
+  
+  <complexType name="StaticInvokeConfig">
+    <annotation>
+      <documentation>
+       调用一个类的静态方法，得到其返回值。
+       通常用于调用一个静态工厂方法，来创建一个新的对象。
+    </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="cf:_genericInvoke">
+        <attribute name="class" type="string">
+          <annotation>
+            <documentation>
+              指定类名。如果method中已经指定了全名(如com.ifeng.common.Test.DoTest)，
+              则不用指定这个属性。
+          </documentation>
+          </annotation>
+        </attribute>
+      </extension>
+    </complexContent>
+  </complexType>
+  
+  <complexType name="ListConfig">
+    <annotation>
+      <documentation>
+       配置一个List。配置方式有两种：
+      1. 用多个item子元素定义每个元素
+      2. 用value属性直接定义多个简单类型的元素值，用逗号隔开。
+    </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="cf:_configurableItemRestricted">
+        <sequence>
+          <element maxOccurs="unbounded" minOccurs="0" name="item" type="cf:ConfigItem">
+            <annotation>
+              <documentation>
+                用多个item子元素定义每个元素。
+            </documentation>
+            </annotation>
+          </element>
+        </sequence>
+        <attribute name="item-type" type="string">
+          <annotation>
+            <documentation>
+              指定元素的缺省类型。如果下面item也指定了类型(type或xsi:type)，
+              必须是item-type的子类。
+          </documentation>
+          </annotation>
+        </attribute>
+      </extension>
+    </complexContent>
+  </complexType>
+  
+  <complexType name="LogConfig">
+    <annotation>
+      <documentation>
+       配置log(log4j)。有两种方法：<br/>
+      1. 直接在此元素下定义log4j:configuration<br/>
+      2. 引用另一个包含log4j:configuration的配置文件<br/>
+    </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="cf:_configurableItemRestricted">
+        <sequence>
+          <any maxOccurs="1" minOccurs="0" namespace="http://jakarta.apache.org/log4j/" processContents="skip">
+            <annotation>
+              <documentation>
+                直接在同一个文件中配置log4j。一般建议用引入外部文件的方法。
+            </documentation>
+            </annotation>
+          </any>
+        </sequence>
+        <attribute name="file" type="string">
+          <annotation>
+            <documentation>
+              指定一个外部log4j配置文件。如果是相对路径，则相对于ConfigRoot的home。
+          </documentation>
+          </annotation>
+        </attribute>
+      </extension>
+    </complexContent>
+  </complexType>
+  
+  <complexType name="MapConfig">
+    <annotation>
+      <documentation>
+      基本配置类型。有两种使用方法：<br/>
+     1. 使用config子元素，一般用于配置文件的整体结构(key必须是String)<br/>
+     2. 使用entry子元素，一般用于专门配置一个Map数据结构(key和value可以是任意类型)<br/>
+    </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="cf:_configurableItemRestricted">
+        <sequence>
+          <choice>
+            <element maxOccurs="unbounded" minOccurs="0" name="config" type="cf:ConfigItem">
+              <annotation>
+                <documentation>
+                  一般用于配置文件的整体结构(key必须是String)
+              </documentation>
+              </annotation>
+            </element>
+            <element maxOccurs="unbounded" minOccurs="0" name="entry">
+              <annotation>
+                <documentation>
+                  一般用于专门配置一个Map数据结构(key和value可以是任意类型)
+              </documentation>
+              </annotation>
+              <complexType>
+                <sequence>
+                  <element minOccurs="0" name="key" type="cf:ConfigItem"/>
+                  <element minOccurs="0" name="value" type="cf:ConfigItem"/>
+                </sequence>
+                <attribute name="key" type="string"/>
+                <attribute name="value" type="string"/>
+              </complexType>
+            </element>
+          </choice>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  
+  <complexType name="ReferenceConfig">
+    <annotation>
+      <documentation>
+       用于配置一个对另一个配置对象的引用。
+       不允许向前引用(即在被引用的对象定义之前引用)
+    </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="cf:_configurableItemWithoutCtor">
+        <attribute name="reference" type="string" use="required">
+          <annotation>
+            <documentation>
+              指定被引用的对象。支持相对引用，即以"."开始，即相对于当前配置文件的根。
+              如何指定一个配置，参见com.ifeng.common.conf.ConfigRoot的getValue方法。
+          </documentation>
+          </annotation>
+        </attribute>
+      </extension>
+    </complexContent>
+  </complexType>
+  
+  
+</schema>

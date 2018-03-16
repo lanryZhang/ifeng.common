@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="C:/ips_lib/lib/icommon/antlr-3.4-complete.jar"/>
+	<classpathentry kind="lib" path="C:/ips_lib/lib/icommon/asm-all-3.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/ips_lib/lib/icommon/cglib-2.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/ips_lib/lib/icommon/commons-beanutils-1.8.3.jar"/>
+	<classpathentry kind="lib" path="C:/ips_lib/lib/icommon/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/ips_lib/lib/icommon/commons-lang3-3.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/ips_lib/lib/icommon/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/ips_lib/lib/icommon/concurrentlinkedhashmap-lru-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/ips_lib/lib/icommon/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/ips_lib/lib/icommon/ehcache-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/ips_lib/lib/icommon/emma.jar"/>
+	<classpathentry kind="lib" path="C:/ips_lib/lib/icommon/hibernate3.jar"/>
+	<classpathentry kind="lib" path="C:/ips_lib/lib/icommon/jta-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/ips_lib/lib/icommon/xerces.jar"/>
+	<classpathentry kind="lib" path="C:/ips_lib/lib/icommon/rt.jar"/>
+	<classpathentry kind="lib" path="C:/ips_lib/lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="C:/ipserver_lib_online/lib/mail.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

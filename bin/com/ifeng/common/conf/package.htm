@@ -1,0 +1,943 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=gb2312">
+<meta name=Generator content="Microsoft Word 14 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:宋体;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:宋体;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:楷体_GB2312;}
+@font-face
+	{font-family:"Copperplate Gothic Bold";
+	panose-1:2 14 7 5 2 2 6 2 4 4;}
+@font-face
+	{font-family:"Lucida Sans";
+	panose-1:2 11 6 2 3 5 4 2 2 4;}
+@font-face
+	{font-family:"\@宋体";
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"\@楷体_GB2312";}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	font-size:10.5pt;
+	font-family:"Times New Roman","serif";}
+h1
+	{mso-style-link:"标题 1 Char";
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:12.0pt;
+	margin-left:0cm;
+	text-indent:0cm;
+	line-height:150%;
+	page-break-after:avoid;
+	text-autospace:none;
+	border:none;
+	padding:0cm;
+	font-size:22.0pt;
+	font-family:"Arial","sans-serif";}
+h2
+	{mso-style-link:"标题 2 Char";
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	text-indent:0cm;
+	line-height:150%;
+	page-break-after:avoid;
+	text-autospace:none;
+	font-size:12.0pt;
+	font-family:"Copperplate Gothic Bold","sans-serif";}
+h3
+	{mso-style-link:"标题 3 Char";
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	text-indent:0cm;
+	line-height:150%;
+	page-break-after:avoid;
+	text-autospace:none;
+	font-size:10.5pt;
+	font-family:宋体;}
+h4
+	{mso-style-link:"标题 4 Char";
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:0cm;
+	line-height:150%;
+	page-break-after:avoid;
+	text-autospace:none;
+	font-size:10.5pt;
+	font-family:"Lucida Sans","sans-serif";}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{mso-style-link:"正文文本 Char";
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:6.0pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	font-size:10.5pt;
+	font-family:"Times New Roman","serif";}
+span.1Char
+	{mso-style-name:"标题 1 Char";
+	mso-style-link:"标题 1";
+	font-family:"Arial","sans-serif";
+	font-weight:bold;}
+span.2Char
+	{mso-style-name:"标题 2 Char";
+	mso-style-link:"标题 2";
+	font-family:"Copperplate Gothic Bold","sans-serif";
+	font-weight:bold;}
+span.3Char
+	{mso-style-name:"标题 3 Char";
+	mso-style-link:"标题 3";
+	font-family:宋体;
+	font-weight:bold;}
+span.4Char
+	{mso-style-name:"标题 4 Char";
+	mso-style-link:"标题 4";
+	font-family:"Lucida Sans","sans-serif";
+	font-weight:bold;}
+span.Char
+	{mso-style-name:"正文文本 Char";
+	mso-style-link:正文文本;
+	font-family:"Times New Roman","serif";}
+.MsoChpDefault
+	{font-family:"Calibri","sans-serif";}
+ /* Page Definitions */
+ @page WordSection1
+	{size:595.3pt 841.9pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	layout-grid:15.6pt;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+
+</head>
+
+<body lang=ZH-CN style='text-justify-trim:punctuation'>
+
+<div class=WordSection1 style='layout-grid:15.6pt'>
+
+<div style='border:none;border-bottom:solid windowtext 1.0pt;padding:0cm 0cm 1.0pt 0cm'>
+
+<h1><span lang=EN-US>com.ifeng.common.conf</span></h1>
+
+</div>
+
+<h2 style='margin-left:0cm;text-indent:0cm'><span lang=EN-US>1.1<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体'>原理</span></h2>
+
+<p class=MsoBodyText><span lang=EN-US>IoC</span><span style='font-family:宋体'>容器，完成依赖注入能力。</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>类似</span><span lang=EN-US>
+Spring </span><span style='font-family:宋体'>，但是更轻量级，更关注扩展性和易用性。</span><span
+lang=EN-US>(common.conf </span><span style='font-family:宋体'>共</span><span
+lang=EN-US> 1793</span><span style='font-family:宋体'>行代码</span><span lang=EN-US>+</span><span
+style='font-family:宋体'>注释</span> <span style='font-family:宋体'>，</span><span
+lang=EN-US> 563</span><span style='font-family:宋体'>分号行</span><span lang=EN-US>)</span></p>
+
+<h2 style='margin-left:0cm;text-indent:0cm'><span lang=EN-US>1.2<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体'>基本配置方式</span></h2>
+
+<p class=MsoBodyText><span lang=EN-US>example.xml:</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>&lt;?</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F7F7F'>xml
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>version</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:black'>=</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;1.0&quot;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>encoding</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:black'>=</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;GB2312&quot;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>?&gt;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&lt;</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#3F7F7F'>config</span><span lang=EN-US style='font-size:
+10.0pt;font-family:"Courier New";color:teal'>&gt;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-indent:10.0pt;
+text-autospace:none'><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&lt;</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#3F7F7F'>config </span><span lang=EN-US style='font-size:
+10.0pt;font-family:"Courier New";color:#7F007F'>name</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:black'>=</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;example&quot;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>type</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:black'>=</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#2A00FF'>&quot;com.ifeng.example.Example&quot;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>&gt;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&lt;</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#3F7F7F'>set-property </span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#7F007F'>name</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>=</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;name&quot;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>value</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:black'>=</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#2A00FF'>&quot;a&quot;</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:teal'>/&gt;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&lt;</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#3F7F7F'>set-property </span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#7F007F'>name</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>=</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;value&quot;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>value=</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#2A00FF'>&quot;aa&quot;</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:teal'>/&gt;</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:black'>&nbsp; </span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:teal'>&lt;/</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#3F7F7F'>config</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:teal'>&gt;</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&lt;/</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#3F7F7F'>config</span><span lang=EN-US style='font-size:
+10.0pt;font-family:"Courier New";color:teal'>&gt;</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&nbsp;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#7F0055'>class</span></b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> Example
+{</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#7F0055'>private</span></b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>
+String </span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#0000C0'>name</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:black'>;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+&nbsp;</span><b><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F0055'>private</span></b><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:black'> String </span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#0000C0'>value</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+&nbsp;</span><b><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F0055'>public</span></b><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:black'> Example () {</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+&nbsp;}</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+&nbsp;</span><b><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F0055'>public</span></b><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:black'> String getName() {</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;</span><b><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#7F0055'>return</span></b><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#0000C0'>name</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+&nbsp;}</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+&nbsp;</span><b><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F0055'>public</span></b><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:black'> String getValue() {</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;</span><b><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#7F0055'>return</span></b><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#0000C0'>value</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+&nbsp;}</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+&nbsp;</span><b><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F0055'>public</span></b><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:black'> </span><b><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#7F0055'>void</span></b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>
+setName(String name) {</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;</span><b><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#7F0055'>this</span></b><span lang=EN-US style='font-size:
+10.0pt;font-family:"Courier New";color:black'>.</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#0000C0'>name</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> =
+name;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+&nbsp;}</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+&nbsp;</span><b><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F0055'>public</span></b><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:black'> </span><b><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#7F0055'>void</span></b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>
+setValue(String value) {</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;</span><b><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#7F0055'>this</span></b><span lang=EN-US style='font-size:
+10.0pt;font-family:"Courier New";color:black'>.</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#0000C0'>value</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> =
+value;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+&nbsp;}</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:black'>}</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:black'>&nbsp;</span></p>
+
+<h2 style='margin-left:0cm;text-indent:0cm'><span lang=EN-US>1.3<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><span
+lang=EN-US>Type</span><span style='font-family:宋体'>说明</span></h2>
+
+<p class=MsoBodyText><span style='font-family:宋体'>针对</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&lt;</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#3F7F7F'>config </span><span lang=EN-US style='font-size:
+10.0pt;font-family:"Courier New";color:#7F007F'>name</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:black'>=</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;example&quot;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>type</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:black'>=</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#2A00FF'>&quot;com.ifeng.example.Example&quot;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>&gt;</span></p>
+
+<p class=MsoBodyText><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>描述的为该段配置对应的类型。</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>包含如下几种形式：</span></p>
+
+<p class=MsoBodyText><span lang=EN-US>1 </span><span style='font-family:宋体'>缺省类型，即不指定</span><span
+lang=EN-US>type</span><span style='font-family:宋体'>时，默认为</span><span
+lang=EN-US>java.lang.String</span></p>
+
+<p class=MsoBodyText><span lang=EN-US>2 </span><span style='font-family:宋体'>支持基本数据类型（</span><span
+lang=EN-US>primitive</span><span style='font-family:宋体'>）：</span><span
+lang=EN-US>byte/char/short/boolean/int/long/float&nbsp; </span><span
+style='font-family:宋体'>等。</span></p>
+
+<p class=MsoBodyText><span lang=EN-US>3 com.ifeng.common.conf</span><span
+style='font-family:宋体'>中的类型，使用“</span><span lang=EN-US>.</span><span
+style='font-family:宋体'>”开头直接跟类名，可以省略前面的包名如：</span></p>
+
+<p class=MsoBodyText style='text-indent:21.0pt'><span lang=EN-US>com.ifeng.common.conf.MapConfig
+</span><span style='font-family:宋体'>可以写为</span><span lang=EN-US>.MapConfig</span></p>
+
+<p class=MsoBodyText><span lang=EN-US>4 </span><span style='font-family:宋体'>其他类型，使用包含报名的类名来描述如上面的</span><span
+lang=EN-US>example</span><span style='font-family:宋体'>。</span></p>
+
+<p class=MsoBodyText><span lang=EN-US>&nbsp;</span></p>
+
+<h2 style='margin-left:0cm;text-indent:0cm'><span lang=EN-US>1.4<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体'>对象的配置方式</span></h2>
+
+<h3 style='margin-left:0cm;text-indent:0cm'><span lang=EN-US>1.4.1<span
+style='font:7.0pt "Times New Roman"'> </span></span>构造函数</h3>
+
+<p class=MsoBodyText><span style='font-family:宋体'>例如：</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>&lt;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F7F7F'>config
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>name</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:black'>=</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#2A00FF'>&quot;TestConstructorArg3&quot; </span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#7F007F'>type</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>=</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;.ConfigForTest&quot;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>&gt;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&lt;</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#3F7F7F'>constructor-arg </span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#7F007F'>value</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>=</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;strValue1&quot;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>/&gt;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&lt;</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#3F7F7F'>constructor-arg </span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#7F007F'>type</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>=</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;int&quot;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>value</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:black'>=</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#2A00FF'>&quot;999&quot;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>/&gt;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-indent:20.0pt;
+text-autospace:none'><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&lt;</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#3F7F7F'>constructor-arg </span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#7F007F'>type</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>=</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;com.ifeng.common.misc.IpV4Address&quot;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>value</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:black'>=</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#2A00FF'>&quot;2.3.4.5&quot;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>/&gt;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&lt;</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#3F7F7F'>constructor-arg </span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#7F007F'>declared-type</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>=</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;.ConfigForTest&quot;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>type</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:black'>=</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#2A00FF'>&quot;.ReferenceConfig&quot; </span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>reference</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:black'>=</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;TestConstructorArg2&quot;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>/&gt;</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:black'>&nbsp; </span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:teal'>&lt;/</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#3F7F7F'>config</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:teal'>&gt;</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&nbsp;</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>会自动匹配，数量匹配且类型最接近的构造函数。</span></p>
+
+<p class=MsoBodyText><span lang=EN-US>&nbsp;</span></p>
+
+<h3 style='margin-left:0cm;text-indent:0cm'><span lang=EN-US>1.4.2<span
+style='font:7.0pt "Times New Roman"'> </span></span><span lang=EN-US>setter </span></h3>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>&lt;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F7F7F'>config
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>name</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:black'>=</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#2A00FF'>&quot;TestSetProperty&quot; </span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#7F007F'>type</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>=</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;.ConfigForTest&quot;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>&gt;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&lt;</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#3F7F7F'>set-property </span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#7F007F'>name</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>=</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;strValue&quot;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>value</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:black'>=</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#2A00FF'>&quot;str&quot;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>/&gt;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&lt;</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#3F7F7F'>set-property </span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#7F007F'>name</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>=</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;intValue&quot;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>value</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:black'>=</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#2A00FF'>&quot;0x1234abcd&quot;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>/&gt;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&lt;</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#3F7F7F'>set-property </span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#7F007F'>name</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>=</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;ipV4Value&quot;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>value</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:black'>=</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#2A00FF'>&quot;1.2.3.4&quot;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>/&gt;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&lt;</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#3F7F7F'>set-property </span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#7F007F'>name</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>=</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;objValue&quot;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>value</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:black'>=</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#2A00FF'>&quot;stringObj&quot;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>/&gt;</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:black'>&nbsp; </span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:teal'>&lt;/</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#3F7F7F'>config</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:teal'>&gt;</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>会首先调用没有参数的构造函数，然后调用对应的</span><span
+lang=EN-US>set</span><span style='font-family:宋体'>方法。</span></p>
+
+<p class=MsoBodyText><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>需要有一个无参数的构造函数</span><span
+lang=EN-US>.</span></p>
+
+<p class=MsoBodyText><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>适合普通的</span><span lang=EN-US>POJO</span><span
+style='font-family:宋体'>类。</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>如果含有多个字符串参数，可以简写为：</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>&lt;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F7F7F'>config
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>name</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:black'>=</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#2A00FF'>&quot;TestSetProperties1&quot; </span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#7F007F'>type</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>=</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;.ConfigForTest&quot;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>&gt;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&lt;</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#3F7F7F'>set-properties </span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#7F007F'>strValue</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>=</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;str100&quot;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>intValue</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:black'>=</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;100&quot;
+</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>ipV4Value</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:black'>=</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;128.129.130.131&quot;
+</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#7F007F'>objValue</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:black'>=</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:#2A00FF'>&quot;stringObj&quot;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:teal'>/&gt;</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:black'>&nbsp; </span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:teal'>&lt;/</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#3F7F7F'>config</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:teal'>&gt;</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:teal'>&nbsp;</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>调用过程一致。</span></p>
+
+<h3 style='margin-left:0cm;text-indent:0cm'><span lang=EN-US>1.4.3<span
+style='font:7.0pt "Times New Roman"'> </span></span>特殊的构造方式</h3>
+
+<p class=MsoBodyText><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>需要待构造的类实现</span><span
+lang=EN-US>com.ifeng.common.conf.Configurable</span><span style='font-family:
+宋体'>接口。</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>/**</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; &nbsp;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>*</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:宋体;color:#3F5FBF'>配置一个对象</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>.</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; &nbsp;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>*</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> </span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; &nbsp;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>*</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#7F9FBF'>@param</span></b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>configRoot</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:宋体;color:#3F5FBF'>当前的配置上下文对象</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>(</span><span
+style='font-size:10.0pt;font-family:宋体;color:#3F5FBF'>在一个子系统中可能只有一个</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>)</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; &nbsp;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>*</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#7F9FBF'>@param</span></b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>parent</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:宋体;color:#3F5FBF'>上级对象</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; &nbsp;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>*</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#7F9FBF'>@param</span></b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>configEle</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:宋体;color:#3F5FBF'>配置元素</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; &nbsp;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>*</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#7F9FBF'>@return</span></b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:宋体;color:#3F5FBF'>配置完成的对象，一般应该是</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>this,</span><span
+style='font-size:10.0pt;font-family:宋体;color:#3F5FBF'>但是也可以不是它自己</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; &nbsp;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>*</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#7F9FBF'>@throws</span></b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>ConfigException</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+style='font-size:10.0pt;font-family:宋体;color:#3F5FBF'>配置出错时</span><span
+style='font-size:10.0pt;font-family:"Courier New";color:black'> </span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>(unchecked)</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; &nbsp;</span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#3F5FBF'>*/</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#7F0055'>public</span></b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>
+Object config(ConfigRoot configRoot, Object parent, Element configEle)</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:#7F0055'>throws</span></b><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>
+ConfigException </span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";color:#3F7F5F'>/* unchecked */</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:black'>;</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:black'>&nbsp;</span></p>
+
+<p class=MsoBodyText><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>实现此方法，即自己解析属于自己的配置，然后构造一个自己并返回。</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>解析时可以依赖</span><span
+lang=EN-US>configRoot</span><span style='font-family:宋体'>提供的解析能力。</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>该方式的例子目的可以参考</span><span
+lang=EN-US>Configurable</span><span style='font-family:宋体'>接口的</span><span
+lang=EN-US>javadoc</span><span style='font-family:宋体'>：</span></p>
+
+<p class=MsoBodyText><span style='font-size:9.0pt;font-family:宋体'><img
+width=626 height=550 src="package.files/image001.jpg"></span></p>
+
+<p class=MsoBodyText><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>好处：代替很多情况下的</span><span
+lang=EN-US>constructor-arg</span><span style='font-family:宋体'>或</span><span
+lang=EN-US>set-property</span><span style='font-family:宋体'>，使配置文件更可读</span> <span
+style='font-family:宋体'>。</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>可能的弊端：引入了对象对框架的依赖关系</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>使得这个对象不是</span><span
+lang=EN-US>POJO</span><span style='font-family:宋体'>了</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>实现时需要权衡</span></p>
+
+<p class=MsoBodyText style='text-indent:21.0pt'><span style='font-family:宋体'>配置文件的可读性</span><span
+lang=EN-US> vs. </span><span style='font-family:宋体'>配置框架的无关性</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>一般情况下，我们偏重于前者</span><span
+lang=EN-US>.</span></p>
+
+<p class=MsoBodyText><span lang=EN-US>&nbsp;</span></p>
+
+<h2 style='margin-left:0cm;text-indent:0cm'><span lang=EN-US>1.5<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-family:宋体'>容器的装载</span></h2>
+
+<p class=MsoBodyText><span lang=EN-US>ConfigRoot configRoot = new ConfigRoot(“</span><span
+style='font-family:宋体'>配置文件路径</span><span lang=EN-US>”,System.getProperties());</span></p>
+
+<p class=MsoBodyText><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>也可以将路径和文件名分开，并使用</span><span
+lang=EN-US>URL</span><span style='font-family:宋体'>做参数。参考</span><span
+lang=EN-US>ConfigRoot</span><span style='font-family:宋体'>的其他构造方法。</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>然后可以用下面的代码得到配置好的对象：</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:black'>ConfigForTest
+obj1 = (ConfigForTest)</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";color:#0000C0'>configRoot</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:black'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+.getValue(</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+color:#2A00FF'>&quot;TestConstructorArg1&quot;</span><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:black'>);</span></p>
+
+<p class=MsoBodyText align=left style='text-align:left'><span style='font-family:
+宋体'>即得到配置文件中下面的对象：</span></p>
+
+<p class=MsoBodyText align=left style='text-align:left'><span lang=EN-US>&lt;config
+name=&quot;TestConstructorArg1&quot; type=&quot;.ConfigForTest&quot;/&gt;</span></p>
+
+<p class=MsoBodyText align=left style='text-align:left'><span lang=EN-US>&nbsp;</span></p>
+
+<h2 style='margin-left:0cm;text-indent:0cm'><span lang=EN-US>1.6<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><span
+lang=EN-US>Conf</span><span style='font-family:宋体'>包中的扩展类型</span></h2>
+
+<h3 style='margin-left:0cm;text-indent:0cm'><span lang=EN-US>1.6.1<span
+style='font:7.0pt "Times New Roman"'> </span></span><span lang=EN-US>ListConfig</span></h3>
+
+<p class=MsoBodyText><span style='font-family:宋体'>配置一个</span><span lang=EN-US>java.util.ArrayList</span></p>
+
+<p class=MsoBodyText><span style='font-size:9.0pt;font-family:宋体'><img
+width=574 height=226 src="package.files/image002.png"></span></p>
+
+<h3 style='margin-left:0cm;text-indent:0cm'>1.6.2<span style='font:7.0pt "Times New Roman"'>
+</span>MapConfig</h3>
+
+<p class=MsoBodyText><span style='font-family:宋体'>配置一个</span>java.util.HashMap</p>
+
+<p class=MsoBodyText><span style='font-size:9.0pt;font-family:宋体'><img
+width=293 height=240 src="package.files/image003.png"></span></p>
+
+<p class=MsoBodyText><span style='font-size:9.0pt;font-family:宋体'>&nbsp;</span></p>
+
+<h3 style='margin-left:0cm;text-indent:0cm'>1.6.3<span style='font:7.0pt "Times New Roman"'>
+</span>ReferenceConfig</h3>
+
+<p class=MsoBodyText><span style='font-size:9.0pt;font-family:宋体'><img
+width=612 height=322 src="package.files/image004.png"></span></p>
+
+<h3 style='margin-left:0cm;text-indent:0cm'>1.6.4<span style='font:7.0pt "Times New Roman"'>
+</span>IncludeConfig</h3>
+
+<p class=MsoBodyText><span style='font-size:9.0pt;font-family:宋体'><img
+width=677 height=382 src="package.files/image005.png"></span></p>
+
+<p class=MsoBodyText>&nbsp;</p>
+
+<h3 style='margin-left:0cm;text-indent:0cm'>1.6.5<span style='font:7.0pt "Times New Roman"'>
+</span>InvokeConfig</h3>
+
+<p class=MsoBodyText><span style='font-size:9.0pt;font-family:宋体'><img
+width=438 height=320 src="package.files/image006.png"></span></p>
+
+<p class=MsoBodyText>&nbsp;</p>
+
+<h3 style='margin-left:0cm;text-indent:0cm'>1.6.6<span style='font:7.0pt "Times New Roman"'>
+</span>StaticInvokeConfig</h3>
+
+<p class=MsoBodyText><span style='font-size:9.0pt;font-family:宋体'><img
+width=531 height=257 src="package.files/image007.png"></span></p>
+
+<p class=MsoBodyText>&nbsp;</p>
+
+<h3 style='margin-left:0cm;text-indent:0cm'>1.6.7<span style='font:7.0pt "Times New Roman"'>
+</span>LogConfig</h3>
+
+<p class=MsoBodyText><span style='font-size:9.0pt;font-family:宋体'><img
+width=662 height=359 src="package.files/image008.png"></span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体'>上文配置完成的</span><span
+lang=EN-US>log</span><span style='font-family:宋体'>为一个</span><span lang=EN-US>log4j</span><span
+style='font-family:宋体'>的配置，需要代码中使用</span><span lang=EN-US>com.ifeng.common.misc.Logger</span><span
+style='font-family:宋体'>类来初始化</span><span lang=EN-US>log</span><span
+style='font-family:宋体'>。</span></p>
+
+<p class=MsoBodyText><span style='font-size:9.0pt;font-family:宋体'>&nbsp;</span></p>
+
+<h2 style='margin-left:0cm;text-indent:0cm'>1.7<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span><span style='font-family:宋体'>一些建议</span></h2>
+
+<p class=MsoBodyText><span style='color:red'>IncludeConfig </span><span
+style='font-family:宋体;color:red'>文件的相对路径决定于最外层的配置文件的路径。</span></p>
+
+<p class=MsoBodyText><span style='color:red'>IncludeConfig</span><span
+style='font-family:宋体;color:red'>尽量采用</span><span style='color:red'>
+direct=&quot;true&quot; </span><span style='font-family:宋体;color:red'>的形式，以提高配置文件重用时的灵活性。</span></p>
+
+<p class=MsoBodyText><span style='color:red'>ReferenceConfig</span><span
+style='font-family:宋体;color:red'>中的</span><span style='color:red'>reference</span><span
+style='font-family:宋体;color:red'>尽量采用</span><span style='color:red'>&quot;.&quot;</span><span
+style='font-family:宋体;color:red'>开头的本地引用方式，避免</span><span style='color:red'>Include</span><span
+style='font-family:宋体;color:red'>层次影响引用。</span></p>
+
+<p class=MsoBodyText><span style='color:red'>properties </span><span
+style='font-family:宋体;color:red'>文件只能在文件系统中使用，不能在</span><span style='color:
+red'>jar</span><span style='font-family:宋体;color:red'>包中使用。</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体;color:red'>配置文件过于复杂时，建议将复杂而固定不变的配置项用</span><span
+style='color:red'>xml</span><span style='font-family:宋体;color:red'>形式放在</span><span
+style='color:red'>jar</span><span style='font-family:宋体;color:red'>包中，在</span><span
+style='color:red'>xml</span><span style='font-family:宋体;color:red'>中引用放在</span><span
+style='color:red'> conf </span><span style='font-family:宋体;color:red'>目录中的</span><span
+style='color:red'>properties</span><span style='font-family:宋体;color:red'>文件，以简化用户的配置。</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体;color:red'>可以将</span><span
+style='color:red'> IncludeConfig </span><span style='font-family:宋体;color:red'>配置项指向的文件名放在</span><span
+style='color:red'> properteis </span><span style='font-family:宋体;color:red'>文件中定义，以便在需要时通过指定文件目录中修改过的配置文件来修改配置文件内容。</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='color:red'>Configurable </span><span
+style='font-family:宋体;color:red'>接口提供了配置格式的灵活性，但是除了非常复杂的配置，还是应该尽量少使用</span><span
+lang=EN-US style='color:red'> config </span><span style='font-family:宋体;
+color:red'>方法，以避免造成框架对业务对象的污染。</span></p>
+
+<p class=MsoBodyText><span style='font-family:宋体;color:red'>不要随意通过装载配置文件来生成</span><span
+lang=EN-US style='color:red'>ConfigRoot</span><span style='font-family:宋体;
+color:red'>，应该在单一位置装载</span><span lang=EN-US style='color:red'> xml</span><span
+style='font-family:宋体;color:red'>（在服务器启动时或者在的确无法注入的地方，比如</span><span
+lang=EN-US style='color:red'> servlet </span><span style='font-family:宋体;
+color:red'>引用的工厂中）。</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='color:red'>ConfigRoot </span><span
+style='font-family:宋体;color:red'>只应该出现在两个地方：服务器启动的</span><span lang=EN-US
+style='color:red'> main </span><span style='font-family:宋体;color:red'>方法，及</span><span
+lang=EN-US style='color:red'> config </span><span style='font-family:宋体;
+color:red'>方法内部</span><span lang=EN-US style='color:red'>(</span><span
+style='font-family:宋体;color:red'>即应该遵循</span><span lang=EN-US style='color:
+red'> IoC </span><span style='font-family:宋体;color:red'>的思想，对象间的依赖应该通过注入的方式（构造方法或者</span><span
+lang=EN-US style='color:red'>set</span><span style='font-family:宋体;color:red'>方法）得到，而不应该用查询的方法得到</span><span
+lang=EN-US style='color:red'>)</span><span style='font-family:宋体;color:red'>。</span></p>
+
+<p class=MsoBodyText><span lang=EN-US style='color:red'>Configurable </span><span
+style='font-family:宋体;color:red'>应该不影响类的行为，可以</span><span lang=EN-US
+style='color:red'> config </span><span style='font-family:宋体;color:red'>出来的对象，应该也能通过创建对象和</span><span
+lang=EN-US style='color:red'> set </span><span style='font-family:宋体;
+color:red'>方法构造出来。</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+</div>
+
+</body>
+
+</html>
